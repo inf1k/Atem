@@ -658,6 +658,25 @@ function Device(atemIpAddress){
 		atem.sendCommand(cmd);
 	};
 
+	this.setMeProgram = function(me, sourceID) {
+		var data = new Buffer(4);
+		data.writeUInt8(me, 0);
+		data.writeUInt16BE(sourceID, 2);
+
+		const cmd = new Command('CPgI', data);
+		atem.sendCommand(cmd);
+	};
+
+
+	this.setMePreview = function(me, source) {
+		var data = new Buffer(4);
+		data.writeUInt8(me, 0);
+		data.writeUInt16BE(source, 2);
+
+		const cmd = new Command('CPvI', data);
+		atem.sendCommand(cmd);
+	};
+
 	/**
 	 * Change the auxiliary output
 	 * @param {SourceID} aux
